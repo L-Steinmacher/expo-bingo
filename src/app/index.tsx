@@ -1,7 +1,7 @@
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
-import { Button, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 
 export default function App() {
     const [count, setCount] = useState(0);
@@ -11,11 +11,11 @@ export default function App() {
             <StatusBar style="auto" />
             <Stack.Screen
                 options={{
-                    title: "Home",
+                    title: "Bingo",
                     headerRight: () => (
-                        <Button
-                            onPress={() => setCount((c) => c + 1)}
-                            title="Update count"
+                        <Image
+                            source={require("../../assets/logo.png")}
+                            style={styles.logo}
                         />
                     ),
                 }}
@@ -31,5 +31,10 @@ const styles = StyleSheet.create({
         backgroundColor: "#fff",
         alignItems: "center",
         justifyContent: "center",
+    },
+    logo: {
+        width: 40,
+        height: 40,
+        marginRight: 10,
     },
 });

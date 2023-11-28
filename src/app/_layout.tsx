@@ -12,6 +12,19 @@ export default function Layout() {
                     fontWeight: "bold",
                 },
             }}
-        />
+        >
+            <Stack.Screen
+                name="[tile]"
+                options={{
+                    presentation: "modal",
+                }}
+            />
+            <Stack.Screen
+                name="index"
+                options={{
+                    title: "Bingo",
+                }}
+            />
+        </Stack>
     );
 }

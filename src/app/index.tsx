@@ -1,4 +1,4 @@
-import { Stack } from "expo-router";
+import { Stack, useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
@@ -25,27 +25,27 @@ export default function App() {
     );
 }
 
-function Tile(props: { title: string }) {
-    const { title } = props;
+function Tile(props: { tile: string }) {
+    const { tile } = props;
     const [selected, setSelected] = useState(false);
-    const [timesPressed, setTimesPressed] = useState(0);
+    const router = useRouter();
 
     return (
         <View style={styles.tile}>
             <Pressable
-            // onPress={() => {
-            //     setTimesPressed((current) => current + 1);
-            // }}
-            // style={({ pressed }) => [
-            //     {
-            //         backgroundColor: pressed
-            //             ? "rgb(210, 230, 255)"
-            //             : "white",
-            //     },
-            //     styles.wrapperCustom,
-            // ]}
+                onPress={() => router.push(`/${tile}`)}
+                //     setTimesPressed((current) => current + 1);
+                // }}
+                // style={({ pressed }) => [
+                //     {
+                //         backgroundColor: pressed
+                //             ? "rgb(210, 230, 255)"
+                //             : "white",
+                //     },
+                //     styles.wrapperCustom,
+                // ]}
             >
-                {({ pressed }) => <Text>{pressed ? "Pressed!" : title}</Text>}
+                {({ pressed }) => <Text>{pressed ? "Pressed!" : tile}</Text>}
             </Pressable>
         </View>
     );
@@ -58,7 +58,7 @@ function Board() {
             {Array(5)
                 .fill(null)
                 .map((_, index) => (
-                    <Row rowIndex={index} />
+                    <Row key={`row_${index}`} rowIndex={index} />
                 ))}
         </View>
     );
@@ -78,9 +78,9 @@ function Row(props: { rowIndex: number }) {
                 .fill(null)
                 .map((_, index) =>
                     rowIndex === 2 && index === 2 ? (
-                        <Tile title={"Loves JS"} />
+                        <Tile tile={"Loves JS"} key={`tile_${index}`} />
                     ) : (
-                        <Tile title="tile" />
+                        <Tile tile="tile" key={`tile_${index}`} />
                     )
                 )}
         </View>
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "#fff",
-        alignItems: "center",
+        // alignItems: "center",
         justifyContent: "center",
     },
     logo: {
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
         marginRight: 10,
     },
     tile: {
-        backgroundColor: "grey",
+        backgroundColor: "#d7d7d7",
         aspectRatio: 1,
         width: "20%",
         alignItems: "center",

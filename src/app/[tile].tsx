@@ -3,8 +3,14 @@ import { StatusBar } from "expo-status-bar";
 import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 import Form from "./components/form";
 
-export default function Modal() {
-    const { tile } = useLocalSearchParams();
+export default function Modal(props: { content: string }) {
+    let { tile } = useLocalSearchParams();
+
+    // This is Hack I know... but it works.
+    // if tile is of type string[] then take the first element
+    if (Array.isArray(tile)) {
+        tile = tile[0];
+    }
 
     const isPresented = router.canGoBack();
     return (

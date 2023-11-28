@@ -3,7 +3,7 @@ import { StatusBar } from "expo-status-bar";
 import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 import Form from "./components/form";
 
-export default function Tile() {
+export default function Modal() {
     const { tile } = useLocalSearchParams();
 
     const isPresented = router.canGoBack();

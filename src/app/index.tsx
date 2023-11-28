@@ -5,6 +5,7 @@ import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 
 export default function App() {
     const [count, setCount] = useState(0);
+
     return (
         <View style={styles.container}>
             <StatusBar style="auto" />
@@ -52,20 +53,19 @@ function Tile(props: { tile: string }) {
 }
 
 function Board() {
+    const tileSets = generateBoard();
+
     return (
         <View style={styles.board}>
-            <Text>Board</Text>
-            {Array(5)
-                .fill(null)
-                .map((_, index) => (
-                    <Row key={`row_${index}`} rowIndex={index} />
-                ))}
+            {tileSets.map((tileSet, index) => (
+                <Row key={`row_${index}`} rowIndex={index} tileSet={tileSet} />
+            ))}
         </View>
     );
 }
 
-function Row(props: { rowIndex: number }) {
-    const { rowIndex } = props;
+function Row(props: { rowIndex: number; tileSet: string[] }) {
+    const { rowIndex, tileSet } = props;
     return (
         <View
             style={{
@@ -74,17 +74,33 @@ function Row(props: { rowIndex: number }) {
                 backgroundColor: "red",
             }}
         >
-            {Array(5)
-                .fill(null)
-                .map((_, index) =>
-                    rowIndex === 2 && index === 2 ? (
-                        <Tile tile={"Loves JS"} key={`tile_${index}`} />
-                    ) : (
-                        <Tile tile="tile" key={`tile_${index}`} />
-                    )
-                )}
+            {tileSet.map((tile, index) => (
+                <Tile key={`tile_${index}`} tile={tile} />
+            ))}
         </View>
     );
+}
+
+function generateBoard() {
+    const data = require("./data/tiles.json");
+    const indexArr: number[] = [];
+    while (indexArr.length < 24) {
+        const random = Math.floor(Math.random() * data.length);
+        if (!indexArr.includes(random)) {
+            indexArr.push(random);
+        }
+    }
+    const arrLength = [5, 5, 4, 5, 5];
+    const tileSets: string[][] = [];
+    arrLength.forEach((length, index) => {
+        const subArray = indexArr.slice(0, length).map((index) => data[index]);
+        if (index === 2) {
+            subArray.splice(2, 0, "Loves JS");
+        }
+        tileSets.push(subArray);
+        indexArr.splice(0, length);
+    });
+    return tileSets;
 }
 
 const styles = StyleSheet.create({

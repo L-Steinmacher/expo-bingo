@@ -1,6 +1,6 @@
 import { Link, useRouter } from "expo-router";
 import { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import { JsonItem, generateBoard, slugify } from "../utils/misc";
 
 export function Board() {
@@ -65,15 +65,15 @@ function Row(props: { rowIndex: number; tileSet: JsonItem[] }) {
 
 function Tile(props: { tile: JsonItem }) {
     const { tile } = props;
-    const [selected, setSelected] = useState(false);
-    const router = useRouter();
 
     return (
         <View style={styles.tile}>
-            <Link href={`/${tile.slug}`}>
-                <Text style={styles.tileText} numberOfLines={2}>
-                    {tile.content}
-                </Text>
+            <Link href={`/${tile.slug}`} asChild>
+                <Pressable>
+                    <Text style={styles.tileText} numberOfLines={2}>
+                        {tile.content}
+                    </Text>
+                </Pressable>
             </Link>
         </View>
     );

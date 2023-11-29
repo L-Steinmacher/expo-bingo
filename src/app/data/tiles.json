@@ -1,37 +1,177 @@
 [
-    "Works with Backend",
-    "Works with Frontend",
-    "Works Full Stack",
-    "First time at SJS",
-    "Attended at least 3 SJS",
-    "Attended at least 6 SJS ",
-    "Attended Over 12 SJS",
-    "Works with or has worked with Express",
-    "Works with or has worked with React",
-    "Works with or has worked with jQuery",
-    "Works with or has worked with Angular",
-    "Works with or has worked with Gatsby",
-    "Any Other Languages?",
-    "Has a favorite JavaScript framework or library outside the mainstream",
-    "Has experience with WebAssembly",
-    "Familiar with WebRTC",
-    "Works remotely",
-    "Has a side project involving IoT",
-    "Enjoys solving algorithmic challenges",
-    "Regularly participates in hackathons",
-    "Uses GraphQL in projects",
-    "Has a strong opinion on semicolons in JavaScript code",
-    "Uses WebSockets in projects",
-    "Has spoken at a tech conference",
-    "Has organized a coding meetup",
-    "Uses Redux for state management",
-    "Active on Stack Overflow",
-    "Has built a serverless application",
-    "Has deployed a project on AWS",
-    "Uses Docker in development",
-    "Originally from Seattle?",
-    "Transplant Seattleite?",
-    "Has been to Zoo lights",
-    "“Currently My Team is…”",
-    "“It Depends…”"
+    {
+        "id": "3f7a0f9017",
+        "content": "Works with Backend",
+        "slug": "works-with-backend"
+    },
+    {
+        "id": "17fc4bb58b",
+        "content": "Works with Frontend",
+        "slug": "works-with-frontend"
+    },
+    {
+        "id": "9f3c6f7dca",
+        "content": "Works Full Stack",
+        "slug": "works-full-stack"
+    },
+    {
+        "id": "caa0b8d647",
+        "content": "First time at SJS",
+        "slug": "first-time-at-sjs"
+    },
+    {
+        "id": "e5eacd816f",
+        "content": "Attended at least 3 SJS",
+        "slug": "attended-at-least-3-sjs"
+    },
+    {
+        "id": "8f7a0f9017",
+        "content": "Attended at least 6 SJS ",
+        "slug": "attended-at-least-6-sjs"
+    },
+    {
+        "id": "6b05a8c49b",
+        "content": "Attended Over 12 SJS",
+        "slug": "attended-over-12-sjs"
+    },
+    {
+        "id": "4bb58b709f",
+        "content": "Works with or has worked with Express",
+        "slug": "works-with-or-has-worked-with-express"
+    },
+    {
+        "id": "9f3c6f7dca",
+        "content": "Works with or has worked with React",
+        "slug": "works-with-or-has-worked-with-react"
+    },
+    {
+        "id": "7dca019f3c",
+        "content": "Works with or has worked with jQuery",
+        "slug": "works-with-or-has-worked-with-jquery"
+    },
+    {
+        "id": "9b1a4c48e5",
+        "content": "Works with or has worked with Angular",
+        "slug": "works-with-or-has-worked-with-angular"
+    },
+    {
+        "id": "2e04c9752f",
+        "content": "Works with or has worked with Gatsby",
+        "slug": "works-with-or-has-worked-with-gatsby"
+    },
+    {
+        "id": "a7e5eacd81",
+        "content": "Any Other Languages?",
+        "slug": "any-other-languages"
+    },
+    {
+        "id": "6f7dca019f",
+        "content": "Has a favorite JavaScript framework or library outside the mainstream",
+        "slug": "has-a-favorite-javascript-framework-or-library-outside-the-mainstream"
+    },
+    {
+        "id": "6b05a8c49b",
+        "content": "Has experience with WebAssembly",
+        "slug": "has-experience-with-webassembly"
+    },
+    {
+        "id": "4bb58b709f",
+        "content": "Familiar with WebRTC",
+        "slug": "familiar-with-webrtc"
+    },
+    {
+        "id": "ca010e5eac",
+        "content": "Works remotely",
+        "slug": "works-remotely"
+    },
+    {
+        "id": "7dca019f3c",
+        "content": "Has a side project involving IoT",
+        "slug": "has-a-side-project-involving-iot"
+    },
+    {
+        "id": "48e5eacd81",
+        "content": "Enjoys solving algorithmic challenges",
+        "slug": "enjoys-solving-algorithmic-challenges"
+    },
+    {
+        "id": "6f7dca019f",
+        "content": "Regularly participates in hackathons",
+        "slug": "regularly-participates-in-hackathons"
+    },
+    {
+        "id": "9f3c6f7dca",
+        "content": "Uses GraphQL in projects",
+        "slug": "uses-graphql-in-projects"
+    },
+    {
+        "id": "bd647a7e5e",
+        "content": "Has a strong opinion on semicolons in JavaScript code",
+        "slug": "has-a-strong-opinion-on-semicolons-in-javascript-code"
+    },
+    {
+        "id": "cd816fa7e5",
+        "content": "Uses WebSockets in projects",
+        "slug": "uses-websockets-in-projects"
+    },
+    {
+        "id": "6f7dca019f",
+        "content": "Has spoken at a tech conference",
+        "slug": "has-spoken-at-a-tech-conference"
+    },
+    {
+        "id": "9b1a4c48e5",
+        "content": "Has organized a coding meetup",
+        "slug": "has-organized-a-coding-meetup"
+    },
+    {
+        "id": "2f7a0f9017",
+        "content": "Uses Redux for state management",
+        "slug": "uses-redux-for-state-management"
+    },
+    {
+        "id": "5eacd816fa",
+        "content": "Active on Stack Overflow",
+        "slug": "active-on-stack-overflow"
+    },
+    {
+        "id": "8e5eacd816",
+        "content": "Has built a serverless application",
+        "slug": "has-built-a-serverless-application"
+    },
+    {
+        "id": "c9752e04c9",
+        "content": "Has deployed a project on AWS",
+        "slug": "has-deployed-a-project-on-aws"
+    },
+    {
+        "id": "52f7a0f901",
+        "content": "Uses Docker in development",
+        "slug": "uses-docker-in-development"
+    },
+    {
+        "id": "17fc4bb58b",
+        "content": "Originally from Seattle?",
+        "slug": "originally-from-seattle"
+    },
+    {
+        "id": "48e5eacd81",
+        "content": "Transplant Seattleite?",
+        "slug": "transplant-seattleite"
+    },
+    {
+        "id": "2f7a0f9017",
+        "content": "Has been to Zoo lights",
+        "slug": "has-been-to-zoo-lights"
+    },
+    {
+        "id": "48e5eacd81",
+        "content": "“Currently My Team is…”",
+        "slug": "currently-my-team-is"
+    },
+    {
+        "id": "6b05a8c49b",
+        "content": "“It Depends…”",
+        "slug": "it-depends"
+    }
 ]

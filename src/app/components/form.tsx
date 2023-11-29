@@ -1,4 +1,4 @@
-import { Link } from "expo-router";
+import { Link, useRouter } from "expo-router";
 import { useState } from "react";
 import { Button, StyleSheet, Text, TextInput, View } from "react-native";
 
@@ -7,6 +7,8 @@ export default function Form(props: {
 }) {
     const { tileTitle } = props;
     const [name, setName] = useState("");
+    const router = useRouter();
+
     return (
         <View style={styles.container}>
             <View style={styles.form}>
@@ -18,7 +20,11 @@ export default function Form(props: {
                     value={name}
                     onChangeText={setName}
                 />
-                <Button title="Submit" disabled={name === ""} />
+                <Button
+                    title="Submit"
+                    disabled={name === ""}
+                    onPress={() => router.push(`../`)}
+                />
             </View>
         </View>
     );

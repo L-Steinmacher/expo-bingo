@@ -1,7 +1,7 @@
 import { Link, useRouter } from "expo-router";
 import { useState } from "react";
-import { Linking, Pressable, StyleSheet, Text, View } from "react-native";
-import { generateBoard, slugify } from "../utils/misc";
+import { StyleSheet, Text, View } from "react-native";
+import { JsonItem, generateBoard, slugify } from "../utils/misc";
 
 export function Board() {
     const tileSets = generateBoard();
@@ -33,10 +33,10 @@ export function Board() {
                         Row {index + 1}
                     </Text>
                     {tileSet.map((tile, index) => {
-                        const slug = slugify(tile);
+                        const slug = slugify(tile.content);
                         return (
                             <Link key={`tile_${index}`} href={`/${slug}`}>
-                                {tile}
+                                {tile.content}
                             </Link>
                         );
                     })}
@@ -46,7 +46,7 @@ export function Board() {
     );
 }
 
-function Row(props: { rowIndex: number; tileSet: string[] }) {
+function Row(props: { rowIndex: number; tileSet: JsonItem[] }) {
     const { rowIndex, tileSet } = props;
     return (
         <View
@@ -63,17 +63,16 @@ function Row(props: { rowIndex: number; tileSet: string[] }) {
     );
 }
 
-function Tile(props: { tile: string }) {
+function Tile(props: { tile: JsonItem }) {
     const { tile } = props;
     const [selected, setSelected] = useState(false);
     const router = useRouter();
-    const slug = slugify(tile);
 
     return (
         <View style={styles.tile}>
-            <Link href={`/${slug}`}>
+            <Link href={`/${tile.slug}`}>
                 <Text style={styles.tileText} numberOfLines={2}>
-                    {tile}
+                    {tile.content}
                 </Text>
             </Link>
         </View>

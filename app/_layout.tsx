@@ -1,30 +1,34 @@
 import { Stack } from "expo-router";
+import { Provider } from "react-redux";
+import { store } from "./utils/store";
 
 export default function Layout() {
     return (
-        <Stack
-            screenOptions={{
-                headerStyle: {
-                    backgroundColor: "#8CAA1D",
-                },
-                headerTintColor: "#fff",
-                headerTitleStyle: {
-                    fontWeight: "bold",
-                },
-            }}
-        >
-            <Stack.Screen
-                name="[tile]"
-                options={{
-                    presentation: "modal",
+        <Provider store={store}>
+            <Stack
+                screenOptions={{
+                    headerStyle: {
+                        backgroundColor: "#8CAA1D",
+                    },
+                    headerTintColor: "#fff",
+                    headerTitleStyle: {
+                        fontWeight: "bold",
+                    },
                 }}
-            />
-            <Stack.Screen
-                name="index"
-                options={{
-                    title: "Bingo",
-                }}
-            />
-        </Stack>
+            >
+                <Stack.Screen
+                    name="[tile]"
+                    options={{
+                        presentation: "modal",
+                    }}
+                />
+                <Stack.Screen
+                    name="index"
+                    options={{
+                        title: "Bingo",
+                    }}
+                />
+            </Stack>
+        </Provider>
     );
 }

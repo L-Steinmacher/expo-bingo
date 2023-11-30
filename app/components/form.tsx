@@ -1,18 +1,23 @@
-import { Link, useRouter } from "expo-router";
+import { useRouter } from "expo-router";
 import { useState } from "react";
 import { Button, StyleSheet, Text, TextInput, View } from "react-native";
+import { useAppDispatch } from "../hooks/redux";
+import { setActive } from "../feature/tile/tile-slice";
 
-export default function Form(props: {
-    tileTitle: string | string[] | undefined;
-}) {
-    const { tileTitle } = props;
+export default function Form(props: { tileId: string | string[] | undefined }) {
+    const { tileId } = props;
     const [name, setName] = useState("");
     const router = useRouter();
+    const dispatch = useAppDispatch();
+
+    const handleSubmit = () => {
+        dispatch(setActive({ id: tileId }));
+        router.push(`../`);
+    };
 
     return (
         <View style={styles.container}>
             <View style={styles.form}>
-                <Text>Form: {tileTitle}</Text>
                 <Text style={styles.label}>Name</Text>
                 <TextInput
                     placeholder="Who you talking to?"
@@ -23,7 +28,7 @@ export default function Form(props: {
                 <Button
                     title="Submit"
                     disabled={name === ""}
-                    onPress={() => router.push(`../`)}
+                    onPress={handleSubmit}
                 />
             </View>
         </View>
@@ -33,7 +38,6 @@ export default function Form(props: {
 const styles = StyleSheet.create({
     container: {
         marginTop: 20,
-
         flex: 1,
     },
     input: {

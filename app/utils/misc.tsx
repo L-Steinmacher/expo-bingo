@@ -1,10 +1,15 @@
+import { setTiles } from "../feature/tile/tile-slice";
+import { useAppDispatch } from "../hooks/redux";
+
 export type JsonItem = {
     id: string;
     content: string;
     slug: string;
+    active: boolean;
 };
 
 export function generateBoard() {
+    const dispatch = useAppDispatch();
     // TODO fix JSON to include title, slug, id ... etc
     const data: JsonItem[] = require("../data/tiles.json");
     const indexArr: number[] = [];
@@ -14,6 +19,7 @@ export function generateBoard() {
             indexArr.push(random);
         }
     }
+    const initialArr = indexArr.forEach((index) => data[index]);
     // This seems silly but We need the array[2] to be 5 long AFTER we splice in the new item
     const arrLengths = [5, 5, 4, 5, 5];
     const tileSets: JsonItem[][] = [];
@@ -24,11 +30,13 @@ export function generateBoard() {
                 id: "asdf42069",
                 content: "Loves JS",
                 slug: "loves-js",
+                active: false,
             });
         }
         tileSets.push(subArray);
         indexArr.splice(0, length);
     });
+
     return tileSets;
 }
 

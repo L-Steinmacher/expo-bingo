@@ -2,9 +2,11 @@ import { Link, useRouter } from "expo-router";
 import { useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { JsonItem, generateBoard, slugify } from "../utils/misc";
+import { useAppDispatch } from "../hooks/redux";
+import { setTiles } from "../feature/tile/tile-slice";
 
-export function Board() {
-    const tileSets = generateBoard();
+export function Board(props: { tileSets: JsonItem[][] }) {
+    const { tileSets } = props;
 
     return (
         <View>

@@ -3,18 +3,22 @@ import { StatusBar } from "expo-status-bar";
 import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 
 import Form from "./components/form";
-import { JsonItem, getTileDataBySlug } from "./utils/misc";
+import { useAppSelector } from "./hooks/redux";
 
 export default function Modal() {
-    let { tile } = useLocalSearchParams();
+    let { slug } = useLocalSearchParams();
 
     // This is Hack I know... but it works.
-    // if tile is of type string[] then take the first element
-    if (Array.isArray(tile)) {
-        tile = tile[0];
+    // if tile is of type string[] then take the first element which should be the slug
+    if (Array.isArray(slug)) {
+        slug = slug[0];
     }
-    const tileData = getTileDataBySlug(tile);
 
+    const tileData = useAppSelector((state) =>
+        state.tile.find((t) => t.slug === slug)
+    );
+
+    console.log("tileData", tileData?.active);
     const isPresented = router.canGoBack();
     return (
         <SafeAreaView style={styles.container}>
@@ -25,8 +29,9 @@ export default function Modal() {
             />
             <StatusBar style="light" />
             {!isPresented && <Link href="../">Dismiss</Link>}
-            <Text>{tileData?.content}</Text>
-            <Form tileTitle={tileData?.content} />
+            {/* <Text>{tileData?.content}</Text> */}
+
+            <Form tileId={tileData?.id} />
         </SafeAreaView>
     );
 }

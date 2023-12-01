@@ -17,4 +17,15 @@ module.exports = {
             },
         },
     ],
+    rules: {
+        "@typescript-eslint/consistent-type-imports": [
+            "warn",
+            {
+                prefer: "type-imports",
+                disallowTypeAnnotations: true,
+                fixStyle: "inline-type-imports",
+            },
+        ],
+        "@typescript-eslint/no-duplicate-imports": "warn",
+    },
 };

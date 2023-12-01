@@ -1,9 +1,8 @@
-import { Link, useRouter } from "expo-router";
-import { useState } from "react";
+import { Link } from "expo-router";
 import { Pressable, StyleSheet, Text, View } from "react-native";
-import { JsonItem, generateBoard, slugify } from "../utils/misc";
-import { useAppDispatch } from "../hooks/redux";
-import { setTiles } from "../feature/tile/tile-slice";
+import { JsonItem, slugify } from "../utils/misc";
+import { useAppSelector } from "../hooks/redux";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 export function Board(props: { tileSets: JsonItem[][] }) {
     const { tileSets } = props;
@@ -22,7 +21,7 @@ export function Board(props: { tileSets: JsonItem[][] }) {
             {tileSets.map((tileSet, index) => (
                 <View
                     key={`${Date.now()}_${index}`}
-                    style={{ paddingBottom: 20 }}
+                    style={{ paddingBottom: 20, marginHorizontal: 10 }}
                 >
                     <Text
                         key={`row_${index}`}
@@ -37,9 +36,23 @@ export function Board(props: { tileSets: JsonItem[][] }) {
                     {tileSet.map((tile, index) => {
                         const slug = slugify(tile.content);
                         return (
-                            <Link key={`tile_${index}`} href={`/${slug}`}>
-                                {tile.content}
-                            </Link>
+                            <View
+                                style={{
+                                    flexDirection: "row",
+                                    justifyContent: "space-between",
+                                }}
+                                key={`tile_${index}_v`}
+                            >
+                                <Link key={`tile_${index}`} href={`/${slug}`}>
+                                    {tile.content}
+                                </Link>
+                                {tile.active && (
+                                    <Ionicons
+                                        name="md-checkmark-circle"
+                                        color="green"
+                                    />
+                                )}
+                            </View>
                         );
                     })}
                 </View>
@@ -59,21 +72,28 @@ function Row(props: { rowIndex: number; tileSet: JsonItem[] }) {
             }}
         >
             {tileSet.map((tile, index) => (
-                <Tile key={`tile_${index}`} tile={tile} />
+                <Tile key={`tile_${index}`} slug={tile.slug} />
             ))}
         </View>
     );
 }
 
-function Tile(props: { tile: JsonItem }) {
-    const { tile } = props;
+function Tile(props: { slug: string }) {
+    const tile = useAppSelector((state) =>
+        state.tile.find((t) => t.slug === props.slug)
+    );
 
     return (
-        <View style={styles.tile}>
-            <Link href={`/${tile.slug}`} asChild>
+        <View
+            style={[
+                styles.tile,
+                { backgroundColor: tile?.active ? "#fdd329" : "#bcbcbc" },
+            ]}
+        >
+            <Link href={`/${tile?.slug}`} asChild>
                 <Pressable>
                     <Text style={styles.tileText} numberOfLines={2}>
-                        {tile.content}
+                        {tile?.content}
                     </Text>
                 </Pressable>
             </Link>
@@ -94,7 +114,6 @@ const styles = StyleSheet.create({
         marginRight: 10,
     },
     tile: {
-        backgroundColor: "#d7d7d7",
         aspectRatio: 1,
         width: "20%",
         alignItems: "center",

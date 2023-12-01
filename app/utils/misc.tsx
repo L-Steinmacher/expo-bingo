@@ -30,7 +30,7 @@ export function generateBoard() {
                 id: "asdf42069",
                 content: "Loves JS",
                 slug: "loves-js",
-                active: false,
+                active: true,
             });
         }
         tileSets.push(subArray);

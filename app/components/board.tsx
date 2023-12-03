@@ -33,28 +33,38 @@ export function Board(props: { tileSets: JsonItem[][] }) {
                     >
                         Row {index + 1}
                     </Text>
-                    {tileSet.map((tile, index) => {
-                        const slug = slugify(tile.content);
-                        return (
+                    <View style={{ flex: 1 }}>
+                        {tileSet.map((tile, index) => (
                             <View
                                 style={{
                                     flexDirection: "row",
-                                    justifyContent: "space-between",
+                                    height: 30,
+                                    position: "relative",
+                                    alignItems: "center",
                                 }}
                                 key={`tile_${index}_v`}
                             >
-                                <Link key={`tile_${index}`} href={`/${slug}`}>
-                                    {tile.content}
-                                </Link>
                                 {tile.active && (
                                     <Ionicons
                                         name="md-checkmark-circle"
                                         color="green"
                                     />
                                 )}
+                                <Link
+                                    key={`tile_${index}`}
+                                    href={`/${tile.slug}`}
+                                    style={{
+                                        fontSize: 15,
+                                        position: "absolute",
+                                        left: 20,
+                                        width: "100%",
+                                    }}
+                                >
+                                    {tile.content}
+                                </Link>
                             </View>
-                        );
-                    })}
+                        ))}
+                    </View>
                 </View>
             ))}
         </View>

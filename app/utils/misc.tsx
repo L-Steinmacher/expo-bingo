@@ -1,5 +1,5 @@
 import { setTiles } from "../feature/tile/tile-slice";
-import { useAppDispatch } from "../hooks/redux";
+import { useAppDispatch, useAppSelector } from "../hooks/redux";
 
 export type JsonItem = {
     id: string;
@@ -19,25 +19,15 @@ export function generateBoard() {
             indexArr.push(random);
         }
     }
-    const initialArr = indexArr.forEach((index) => data[index]);
-    // This seems silly but We need the array[2] to be 5 long AFTER we splice in the new item
-    const arrLengths = [5, 5, 4, 5, 5];
-    const tileSets: JsonItem[][] = [];
-    arrLengths.forEach((length, index) => {
-        const subArray = indexArr.slice(0, length).map((index) => data[index]);
-        if (index === 2) {
-            subArray.splice(2, 0, {
-                id: "asdf42069",
-                content: "Loves JS",
-                slug: "loves-js",
-                active: true,
-            });
-        }
-        tileSets.push(subArray);
-        indexArr.splice(0, length);
-    });
-
-    return tileSets;
+    const initialArr = indexArr.map((index) => data[index]);
+    const freeSpace = {
+        id: "asdf42069",
+        content: "Loves JS",
+        slug: "loves-js",
+        active: true,
+    };
+    initialArr.splice(12, 0, freeSpace);
+    dispatch(setTiles(initialArr));
 }
 
 export function getTileDataBySlug(slug: string | undefined) {

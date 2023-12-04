@@ -1,6 +1,6 @@
 import { Stack, useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
     Image,
     Pressable,
@@ -17,9 +17,7 @@ import { useAppDispatch } from "./hooks/redux";
 import { setTiles } from "./feature/tile/tile-slice";
 
 export default function App() {
-    const tileSets = generateBoard();
-    const dispatch = useAppDispatch();
-    dispatch(setTiles(tileSets.flatMap((arr) => arr)));
+    generateBoard();
 
     return (
         <Provider store={store}>
@@ -37,7 +35,7 @@ export default function App() {
                             ),
                         }}
                     />
-                    <Board tileSets={tileSets} />
+                    <Board />
                 </ScrollView>
             </View>
         </Provider>

@@ -4,8 +4,15 @@ import { JsonItem, slugify } from "../utils/misc";
 import { useAppSelector } from "../hooks/redux";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
-export function Board(props: { tileSets: JsonItem[][] }) {
-    const { tileSets } = props;
+export function Board() {
+    const tiles = useAppSelector((state) => state.tile);
+
+    const tileSets: JsonItem[][] = [];
+
+    for (let i = 0; i < 5; i++) {
+        const subArray = tiles.slice(i * 5, i * 5 + 5);
+        tileSets.push(subArray);
+    }
 
     return (
         <View>

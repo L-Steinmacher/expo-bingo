@@ -1,24 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { JsonItem, generateBoard } from "../../utils/misc";
+import { JsonItem } from "../../utils/misc";
 
 // default value of active is false
-interface TileState extends JsonItem {
+export interface Tile extends JsonItem {
     active: boolean;
+    coordinates: coordinates;
 }
+type coordinates = { row: number; column: number };
 
-const initialState: TileState[] = []
+const initialState: Tile[] = []
 
 const tileSlice = createSlice({
     name: "tile",
     initialState,
     reducers: {
         setTiles: (state, action) => {
-
             state.push(...action.payload)
         },
         setActive: (state, action) => {
-            const { id } = action.payload;
-            const tile = state.findIndex((tile) => tile.id === id);
+            const { slug } = action.payload;
+            const tile = state.findIndex((tile) => tile.slug === slug);
             state[tile].active = true;
         }
     }

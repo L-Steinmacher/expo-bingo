@@ -17,8 +17,8 @@ export default function Modal() {
     const tileData = useAppSelector((state) =>
         state.tile.find((t) => t.slug === slug)
     );
+    // console.log(slug, tileData?.content);
 
-    console.log("tileData", tileData?.active);
     const isPresented = router.canGoBack();
     return (
         <SafeAreaView style={styles.container}>
@@ -27,11 +27,11 @@ export default function Modal() {
                     title: tileData?.content,
                 }}
             />
-            <StatusBar style="light" />
+
             {!isPresented && <Link href="../">Dismiss</Link>}
             {/* <Text>{tileData?.content}</Text> */}
 
-            <Form tileId={tileData?.id} />
+            <Form slug={tileData?.slug} />
         </SafeAreaView>
     );
 }

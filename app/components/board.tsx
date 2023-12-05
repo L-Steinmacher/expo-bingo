@@ -13,6 +13,7 @@ export function Board() {
         const subArray = tiles.slice(i * 5, i * 5 + 5);
         tileSets.push(subArray);
     }
+    // console.log(JSON.stringify(tileSets, null, 2));
 
     return (
         <View>
@@ -79,7 +80,7 @@ export function Board() {
 }
 
 function Row(props: { rowIndex: number; tileSet: JsonItem[] }) {
-    const { rowIndex, tileSet } = props;
+    const { tileSet } = props;
     return (
         <View
             style={{

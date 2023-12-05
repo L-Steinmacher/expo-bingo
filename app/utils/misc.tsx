@@ -1,4 +1,4 @@
-import { setTiles } from "../feature/tile/tile-slice";
+import { Tile, setTiles } from "../feature/tile/tile-slice";
 import { useAppDispatch, useAppSelector } from "../hooks/redux";
 
 export type JsonItem = {
@@ -10,7 +10,7 @@ export type JsonItem = {
 
 export function generateBoard() {
     const dispatch = useAppDispatch();
-    // TODO fix JSON to include title, slug, id ... etc
+
     const data: JsonItem[] = require("../data/tiles.json");
     const indexArr: number[] = [];
     while (indexArr.length < 24) {
@@ -20,13 +20,29 @@ export function generateBoard() {
         }
     }
     const initialArr = indexArr.map((index) => data[index]);
-    const freeSpace = {
+    const freeSpace: Tile = {
         id: "asdf42069",
         content: "Loves JS",
         slug: "loves-js",
         active: true,
+        coordinates: {
+            row: 2,
+            column: 2,
+        },
     };
     initialArr.splice(12, 0, freeSpace);
+    for (let i = 0; i < initialArr.length; i++) {
+        const row = Math.floor(i / 5);
+        const column = i % 5;
+        // @ts-ignore
+        console.log(
+            `initialArr[i]: ${initialArr[i]?.content} ,row: ${row} column: ${column}`
+        );
+        initialArr[i].coordinates = {
+            column,
+            row,
+        };
+    }
     dispatch(setTiles(initialArr));
 }
 

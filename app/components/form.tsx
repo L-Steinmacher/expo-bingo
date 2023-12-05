@@ -1,18 +1,31 @@
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import { Button, StyleSheet, Text, TextInput, View } from "react-native";
-import { useAppDispatch } from "../hooks/redux";
+import { useAppDispatch, useAppSelector } from "../hooks/redux";
 import { setActive } from "../feature/tile/tile-slice";
+import { checkForWin, setCoordinates } from "../feature/rules/rule-slice";
 
-export default function Form(props: { tileId: string | string[] | undefined }) {
-    const { tileId } = props;
+export default function Form(props: { slug: string }) {
+    const { slug } = props;
     const [name, setName] = useState("");
     const router = useRouter();
     const dispatch = useAppDispatch();
+    const tile = useAppSelector((state) =>
+        state.tile.find((tile) => tile.slug === slug)
+    );
 
+    console.log(
+        `${tile?.content} : ${tile?.coordinates.column} : row ${tile?.coordinates.row}`
+    );
     const handleSubmit = () => {
-        dispatch(setActive({ id: tileId }));
-        router.push(`../`);
+        let coordinates = {
+            column: tile?.coordinates.column,
+            row: tile?.coordinates.row,
+        };
+        dispatch(setActive({ slug }));
+        dispatch(setCoordinates(coordinates));
+        dispatch(checkForWin());
+        router.push("../");
     };
 
     return (

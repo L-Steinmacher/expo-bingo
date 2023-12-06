@@ -1,13 +1,14 @@
 import { Link } from "expo-router";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { JsonItem } from "../utils/misc";
 import { useAppSelector } from "../hooks/redux";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import Row from "./row";
 
 export function Board() {
+    const userData = useAppSelector((state) => state.user);
     const tiles = useAppSelector((state) => state.tile);
-
-    const tileSets: JsonItem[][] = [];
+    const tileSets = [];
 
     for (let i = 0; i < 5; i++) {
         const subArray = tiles.slice(i * 5, i * 5 + 5);
@@ -60,7 +61,11 @@ export function Board() {
                                 )}
                                 <Link
                                     key={`tile_${index}`}
-                                    href={`/${tile.slug}`}
+                                    href={
+                                        userData.username !== ""
+                                            ? `/${tile.slug}`
+                                            : "/login"
+                                    }
                                     style={{
                                         fontSize: 15,
                                         position: "absolute",
@@ -69,6 +74,8 @@ export function Board() {
                                     }}
                                 >
                                     {tile.content}
+                                    {tile?.coordinates.row} {", "}
+                                    {tile?.coordinates.column}{" "}
                                 </Link>
                             </View>
                         ))}
@@ -79,51 +86,9 @@ export function Board() {
     );
 }
 
-function Row(props: { rowIndex: number; tileSet: JsonItem[] }) {
-    const { tileSet } = props;
-    return (
-        <View
-            style={{
-                flexDirection: "row",
-                flex: 1,
-                backgroundColor: "red",
-            }}
-        >
-            {tileSet.map((tile, index) => (
-                <Tile key={`tile_${index}`} slug={tile.slug} />
-            ))}
-        </View>
-    );
-}
-
-function Tile(props: { slug: string }) {
-    const tile = useAppSelector((state) =>
-        state.tile.find((t) => t.slug === props.slug)
-    );
-
-    return (
-        <View
-            style={[
-                styles.tile,
-                { backgroundColor: tile?.active ? "#fdd329" : "#bcbcbc" },
-            ]}
-        >
-            <Link href={`/${tile?.slug}`} asChild>
-                <Pressable>
-                    <Text style={styles.tileText} numberOfLines={2}>
-                        {tile?.content}
-                    </Text>
-                </Pressable>
-            </Link>
-        </View>
-    );
-}
-
 const styles = StyleSheet.create({
     container: {
-        // flex: 1,
         backgroundColor: "#fff",
-        // alignItems: "center",
         justifyContent: "center",
     },
     logo: {
@@ -131,22 +96,10 @@ const styles = StyleSheet.create({
         height: 40,
         marginRight: 10,
     },
-    tile: {
-        aspectRatio: 1,
-        width: "20%",
-        alignItems: "center",
-        justifyContent: "center",
-        borderWidth: 0.25,
-        borderColor: "black",
-    },
+
     board: {
         aspectRatio: 1,
         width: "100%",
         padding: 10,
-    },
-    tileText: {
-        fontSize: 12,
-        textAlign: "center",
-        padding: 2,
     },
 });

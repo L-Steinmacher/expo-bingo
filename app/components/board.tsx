@@ -1,6 +1,6 @@
 import { Link } from "expo-router";
 import { Pressable, StyleSheet, Text, View } from "react-native";
-import { JsonItem, slugify } from "../utils/misc";
+import { JsonItem } from "../utils/misc";
 import { useAppSelector } from "../hooks/redux";
 import Ionicons from "@expo/vector-icons/Ionicons";
 

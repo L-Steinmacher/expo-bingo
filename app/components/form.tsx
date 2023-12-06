@@ -34,6 +34,7 @@ export default function Form(props: { slug: string }) {
                 <Text style={styles.label}>Name</Text>
                 <TextInput
                     placeholder="Who you talking to?"
+                    maxLength={30}
                     style={styles.input}
                     value={name}
                     onChangeText={setName}
@@ -55,6 +56,7 @@ const styles = StyleSheet.create({
     },
     input: {
         height: 40,
+        padding: 10,
         marginBottom: 20,
         borderWidth: 1,
     },

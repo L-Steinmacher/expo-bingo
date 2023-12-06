@@ -1,6 +1,5 @@
 import { Link, Stack, router, useLocalSearchParams } from "expo-router";
-import { StatusBar } from "expo-status-bar";
-import { SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { SafeAreaView, StyleSheet } from "react-native";
 
 import Form from "./components/form";
 import { useAppSelector } from "./hooks/redux";
@@ -10,7 +9,10 @@ export default function Modal() {
 
     // This is Hack I know... but it works.
     // if tile is of type string[] then take the first element which should be the slug
-    if (Array.isArray(slug)) {
+    if (slug === undefined) {
+        router.push("../");
+    }
+    if (typeof slug === "object") {
         slug = slug[0];
     }
 
@@ -31,7 +33,7 @@ export default function Modal() {
             {!isPresented && <Link href="../">Dismiss</Link>}
             {/* <Text>{tileData?.content}</Text> */}
 
-            <Form slug={tileData?.slug} />
+            <Form slug={slug || ""} />
         </SafeAreaView>
     );
 }

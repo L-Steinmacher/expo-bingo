@@ -15,7 +15,7 @@ const rulesSlice = createSlice({
         setCoordinates: (state, action: PayloadAction<{ row: number | undefined; column: number | undefined }>) => {
             const { row, column } = action.payload;
             state.rows[row].push(column)
-            console.log(row, column);
+            // console.log(row, column);
         },
         checkForWin: (state) => {
             // console.log(JSON.stringify(state.rows, null, 2));

@@ -1,20 +1,11 @@
-import { Stack, useRouter } from "expo-router";
+import { Stack, router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import { useEffect, useState } from "react";
-import {
-    Image,
-    Pressable,
-    ScrollView,
-    StyleSheet,
-    Text,
-    View,
-} from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import { Image, ScrollView, StyleSheet, View } from "react-native";
 import { Board } from "./components/board";
 import { Provider } from "react-redux";
 import { store } from "./utils/store";
 import { generateBoard } from "./utils/misc";
-import { useAppDispatch } from "./hooks/redux";
-import { setTiles } from "./feature/tile/tile-slice";
 
 export default function App() {
     generateBoard();
@@ -31,6 +22,16 @@ export default function App() {
                                 <Image
                                     source={require("../assets/logo.png")}
                                     style={styles.logo}
+                                />
+                            ),
+                            headerLeft: () => (
+                                <Ionicons
+                                    name="log-in-outline"
+                                    size={24}
+                                    color="white"
+                                    onPress={() => {
+                                        router.push("/login");
+                                    }}
                                 />
                             ),
                         }}

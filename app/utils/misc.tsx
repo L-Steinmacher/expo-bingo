@@ -1,5 +1,5 @@
 import { Tile, setTiles } from "../feature/tile/tile-slice";
-import { useAppDispatch, useAppSelector } from "../hooks/redux";
+import { useAppDispatch } from "../hooks/redux";
 
 export type JsonItem = {
     id: string;

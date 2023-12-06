@@ -17,7 +17,7 @@ export default function Layout() {
                 }}
             >
                 <Stack.Screen
-                    name="[tile]"
+                    name="[slug]"
                     options={{
                         presentation: "modal",
                     }}

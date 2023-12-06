@@ -2,10 +2,12 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface RulesState {
     rows: number[][];
+    bingo: boolean;
 }
 
 const initialState: RulesState = {
     rows: [[], [], [2], [], []],
+    bingo: false,
 };
 
 const rulesSlice = createSlice({
@@ -24,6 +26,7 @@ const rulesSlice = createSlice({
                 if (row.length === 5) {
                     // Handle win condition
                     console.log("Row win!");
+                    state.bingo = true;
                     return;
                 }
             }
@@ -33,6 +36,7 @@ const rulesSlice = createSlice({
                 const isColumnComplete = state.rows.every((row) => row.includes(col));
                 if (isColumnComplete) {
                     // Handle win condition
+                    state.bingo = true;
                     console.log("Column win!");
                     return;
                 }
@@ -52,6 +56,7 @@ const rulesSlice = createSlice({
             }
             if (isDiagonalComplete) {
                 // Handle win condition
+                state.bingo = true;
                 console.log("Diagonal win!");
             }
 
@@ -69,6 +74,7 @@ const rulesSlice = createSlice({
             }
             if (isDiagonalCompleteReverse) {
                 // Handle win condition
+                state.bingo = true;
                 console.log("Reverse Diagonal win!");
             }
             isDiagonalCompleteReverse = true;

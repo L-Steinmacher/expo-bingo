@@ -1,20 +1,12 @@
 import { Link } from "expo-router";
 import { StyleSheet, Text, View } from "react-native";
-import { JsonItem } from "../utils/misc";
 import { useAppSelector } from "../hooks/redux";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Row from "./row";
 
 export function Board() {
     const userData = useAppSelector((state) => state.user);
-    const tiles = useAppSelector((state) => state.tile);
-    const tileSets = [];
-
-    for (let i = 0; i < 5; i++) {
-        const subArray = tiles.slice(i * 5, i * 5 + 5);
-        tileSets.push(subArray);
-    }
-    // console.log(JSON.stringify(tileSets, null, 2));
+    const tileSets = useAppSelector((state) => state.tile.TileSets);
 
     return (
         <View>
@@ -62,16 +54,11 @@ export function Board() {
                                 <Link
                                     key={`tile_${index}`}
                                     href={
-                                        userData.username !== ""
+                                        userData.username
                                             ? `/${tile.slug}`
-                                            : "/login"
+                                            : `/login?redirect=${tile.slug}`
                                     }
-                                    style={{
-                                        fontSize: 15,
-                                        position: "absolute",
-                                        left: 20,
-                                        width: "100%",
-                                    }}
+                                    style={styles.link}
                                 >
                                     {tile.content}
                                     {tile?.coordinates.row} {", "}
@@ -95,6 +82,12 @@ const styles = StyleSheet.create({
         width: 40,
         height: 40,
         marginRight: 10,
+    },
+    link: {
+        fontSize: 15,
+        position: "absolute",
+        left: 20,
+        width: "100%",
     },
 
     board: {

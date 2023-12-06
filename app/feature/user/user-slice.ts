@@ -7,7 +7,7 @@ type User = {
     username: string;
 }
 
-const initialState = {
+const initialState: User = {
     name: "",
     username: ""
 }

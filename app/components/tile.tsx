@@ -4,7 +4,7 @@ import { useAppSelector } from "../hooks/redux";
 
 export default function Tile(props: { slug: string }) {
     const tile = useAppSelector((state) =>
-        state.tile.find((t) => t.slug === props.slug)
+        state.tile.Tiles.find((t) => t.slug === props.slug)
     );
 
     return (

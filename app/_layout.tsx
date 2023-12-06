@@ -17,8 +17,9 @@ export default function Layout() {
                 }}
             >
                 <Stack.Screen
-                    name="[slug]"
+                    name="login"
                     options={{
+                        title: "Login",
                         presentation: "modal",
                     }}
                 />

@@ -35,9 +35,9 @@ export function generateBoard() {
         const row = Math.floor(i / 5);
         const column = i % 5;
         // @ts-ignore
-        console.log(
-            `initialArr[i]: ${initialArr[i]?.content} ,row: ${row} column: ${column}`
-        );
+        // console.log(
+        //     `initialArr[i]: ${initialArr[i]?.content} ,row: ${row} column: ${column}, i: ${i}`
+        // );
         initialArr[i].coordinates = {
             column,
             row,

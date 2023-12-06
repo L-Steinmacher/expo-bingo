@@ -11,12 +11,12 @@ export default function Form(props: { slug: string }) {
     const router = useRouter();
     const dispatch = useAppDispatch();
     const tile = useAppSelector((state) =>
-        state.tile.find((tile) => tile.slug === slug)
+        state.tile.Tiles.find((tile) => tile.slug === slug)
     );
 
-    console.log(
-        `${tile?.content} : ${tile?.coordinates.column} : row ${tile?.coordinates.row}`
-    );
+    // console.log(
+    //     `${tile?.content} : ${tile?.coordinates.column} : row ${tile?.coordinates.row}`
+    // );
     const handleSubmit = () => {
         let coordinates = {
             column: tile?.coordinates.column,

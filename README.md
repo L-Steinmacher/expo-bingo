@@ -16,4 +16,5 @@ Since this is a moble app the iOS version may be viewed using Xcode, or Android 
 - [] Deploy to either the Android and IOS strore or figure out the sideloading on user devices (prefer side loading so we don't have to worry about the store)
 - [] Add Santa Hat Pixel art to the logo! 🎅
 - [] Profit 🤑💰
+- [x] test
 

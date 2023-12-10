@@ -10,9 +10,9 @@ Since this is a moble app the iOS version may be viewed using Xcode, or Android 
 
 ## TODO
 
-[] Build out Backend for entering in raffle once you get bingo
-[] Clean up index marks on cards and console logs
-[] Fix scuffed Login re-routing OR prompt user to create username once they launch the app
-[] Deploy to either the Android and IOS strore or figure out the sideloading on user devices (prefer side loading so we don't have to worry about the store)
-[] Profit 🤑💰
+- [] Build out Backend for entering in raffle once you get bingo
+- [] Clean up index marks on cards and console logs
+- [] Fix scuffed Login re-routing OR prompt user to create username once they launch the app
+- [] Deploy to either the Android and IOS strore or figure out the sideloading on user devices (prefer side loading so we don't have to worry about the store)
+- [] Profit 🤑💰
 

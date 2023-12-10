@@ -1,16 +1,16 @@
 import { Link, Stack, router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { Ionicons } from "@expo/vector-icons";
+import { useEffect } from "react";
 import { Alert, Image, ScrollView, StyleSheet, Text, View } from "react-native";
+
 import { Board } from "./components/board";
-import { Provider } from "react-redux";
-import { store } from "./utils/store";
 import { generateBoard } from "./utils/misc";
 import { useAppSelector } from "./hooks/redux";
-import { useEffect } from "react";
 
 export default function App() {
     generateBoard();
+
     const userData = useAppSelector((state) => state.user);
     const bingo = useAppSelector((state) => state.rules.bingo);
     useEffect(() => {

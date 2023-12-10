@@ -10,8 +10,9 @@ export default function Form(props: { slug: string }) {
     const [name, setName] = useState("");
     const router = useRouter();
     const dispatch = useAppDispatch();
+
     const tile = useAppSelector((state) =>
-        state.tile.Tiles.find((tile) => tile.slug === slug)
+        state.tile.find((tile) => tile.slug === slug)
     );
 
     // console.log(
@@ -25,7 +26,7 @@ export default function Form(props: { slug: string }) {
         dispatch(setActive({ slug }));
         dispatch(setCoordinates(coordinates));
         dispatch(checkForWin());
-        router.push("../");
+        router.push("/");
     };
 
     return (

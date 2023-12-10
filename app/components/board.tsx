@@ -3,10 +3,18 @@ import { StyleSheet, Text, View } from "react-native";
 import { useAppSelector } from "../hooks/redux";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Row from "./row";
+import { useEffect } from "react";
 
 export function Board() {
+    const tiles = useAppSelector((state) => state.tile);
     const userData = useAppSelector((state) => state.user);
-    const tileSets = useAppSelector((state) => state.tile.TileSets);
+
+    const tileSets = [];
+
+    for (let i = 0; i < 5; i++) {
+        const subArray = tiles.slice(i * 5, i * 5 + 5);
+        tileSets.push(subArray);
+    }
 
     return (
         <View>

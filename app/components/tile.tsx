@@ -3,8 +3,12 @@ import { View, Pressable, StyleSheet, Text } from "react-native";
 import { useAppSelector } from "../hooks/redux";
 
 export default function Tile(props: { slug: string }) {
+    const userData = useAppSelector((state) => state.user);
+    // console.log(slug, tileData?.content);
+    const userLoggedIn = userData.username !== "";
+
     const tile = useAppSelector((state) =>
-        state.tile.Tiles.find((t) => t.slug === props.slug)
+        state.tile.find((t) => t.slug === props.slug)
     );
 
     return (
@@ -14,10 +18,18 @@ export default function Tile(props: { slug: string }) {
                 { backgroundColor: tile?.active ? "#fdd329" : "#bcbcbc" },
             ]}
         >
-            <Link href={`/${tile?.slug}`} asChild>
+            <Link
+                href={
+                    userLoggedIn
+                        ? `/${tile?.slug}`
+                        : `/login?redirect=${tile?.slug}`
+                }
+                asChild
+            >
                 <Pressable>
                     <Text style={styles.tileText} numberOfLines={2}>
-                        {tile?.content}
+                        {tile?.content} {tile?.coordinates.column}{" "}
+                        {tile?.coordinates.row}
                     </Text>
                 </Pressable>
             </Link>

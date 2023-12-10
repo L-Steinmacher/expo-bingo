@@ -1,4 +1,10 @@
-import { Link, Stack, router, useLocalSearchParams } from "expo-router";
+import {
+    Link,
+    Stack,
+    router,
+    useFocusEffect,
+    useLocalSearchParams,
+} from "expo-router";
 import { SafeAreaView, StyleSheet } from "react-native";
 
 import Form from "./components/form";
@@ -16,16 +22,11 @@ export default function Modal() {
     }
 
     const tileData = useAppSelector((state) =>
-        state.tile.Tiles.find((t) => t.slug === slug)
+        state.tile.find((t) => t.slug === slug)
     );
-    // console.log(slug, tileData?.content);
-    const userLoggedIn = userData.username !== "";
 
     if (slug === undefined) {
         router.push("../");
-    }
-    if (!userLoggedIn) {
-        router.push(`/login?redirect=${slug}`);
     }
 
     const isPresented = router.canGoBack();

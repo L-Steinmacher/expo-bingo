@@ -8,28 +8,19 @@ export interface Tile extends JsonItem {
     coordinates: coordinates;
 }
 
-const initialState: { Tiles: Tile[], TileSets: Tile[][] } = {
-    Tiles: [],
-    TileSets: []
-}
+const initialState: Tile[] = []
 
 const tileSlice = createSlice({
     name: "tile",
     initialState,
     reducers: {
         setTiles: (state, action) => {
-            const tiles = action.payload;
-            state.Tiles.push(...tiles)
-            for (let i = 0; i < 5; i++) {
-                const subArray = tiles.slice(i * 5, i * 5 + 5);
-                state.TileSets.push(subArray);
-            }
+            state.push(...action.payload)
         },
         setActive: (state, action) => {
             const { slug } = action.payload;
-            const tile = state.Tiles.find((tile) => tile.slug === slug);
-            if (!tile) return;
-            tile.active = true;
+            const tile = state.findIndex((tile) => tile.slug === slug);
+            state[tile].active = true;
         }
     }
 })
